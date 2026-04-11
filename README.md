@@ -1,84 +1,187 @@
-# Patient Portal Team Scaffold
+# 🏥 Patient Portal System (Team Project)
 
-This project is a **team-ready scaffold** for a secure patient portal built with **FastAPI + SQLAlchemy**.
+## 📌 Overview
 
-It intentionally includes:
-- Working app startup
-- Folder structure
-- Placeholder routers
-- Placeholder models
-- Clear TODO markers
-- Team ownership suggestions
+This project is a **secure patient portal web application** built with **Python (FastAPI)** and a relational database.
 
-It intentionally does **not** include a fully completed system, so each teammate can meaningfully contribute.
+The system is designed to simulate a healthcare environment where patient data must be handled with **privacy, security, and controlled access** in mind (HIPAA-inspired principles).
 
-## Features to Build
-- Secure patient login
-- Store patient records
-- Search for patients
-- View patient information
-- Process patient admissions
-- Simple clinician view
-- Audit logs for health data access
-- Privacy and confidentiality controls
-- Secure input handling
-- Threat modeling for unauthorized access and data leakage
+This repository contains a **team scaffold**, providing structure and direction while leaving core features to be implemented collaboratively.
 
-## Suggested Team Split
-1. **Authentication & Access Control**
-   - Login flow
-   - Password hashing
-   - Role-based access
-   - Session or token strategy
+---
 
-2. **Patient Records**
-   - Patient model
-   - Create/read/update logic
-   - Data validation
+## 🎯 Objectives
 
-3. **Patient Search**
-   - Search routes
-   - Filtering logic
-   - Result restrictions based on role
+The system aims to support:
 
-4. **Admissions**
-   - Admission model
-   - Intake workflow
-   - Status tracking
+* Secure patient login
+* Patient record storage and retrieval
+* Patient search functionality
+* Viewing patient information
+* Patient admission workflows
+* Clinician-specific views
+* Audit logging of sensitive data access
+* Security-focused design and threat modeling
 
-5. **Clinician View**
-   - Clinician-specific endpoints
-   - Assigned-patient view
-   - Access boundaries
+---
 
-6. **Audit & Security Review**
-   - Audit logging
-   - Sensitive access tracking
-   - Threat model writeup
-   - Security test checklist
+## 🧱 Project Structure
 
-## Quick Start
+```text
+app/
+├── main.py            # Application entry point
+├── config.py          # Environment/config management
+├── db.py              # Database setup
+├── models/            # Database models
+├── routes/            # API endpoints
+├── schemas/           # Request/response validation
+├── services/          # Business logic layer
+└── security/          # Security utilities
+
+docs/
+├── team_tasks.md      # Suggested team breakdown
+└── threat_model.md    # Security analysis starter
+
+tests/                 # Placeholder for tests
+```
+
+---
+
+## ⚙️ Tech Stack
+
+* **Backend:** FastAPI
+* **Database:** SQLite (starter) → PostgreSQL (recommended)
+* **ORM:** SQLAlchemy
+* **Validation:** Pydantic
+* **Security:** Passlib (planned), role-based access (planned)
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repo
+
+```bash
+git clone <your-repo-url>
+cd patient-portal
+```
+
+### 2. Create virtual environment
+
 ```bash
 python -m venv venv
 venv\Scripts\activate
+```
+
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
+
+### 4. Configure environment
+
+```bash
 copy .env.example .env
+```
+
+### 5. Run the application
+
+```bash
 uvicorn app.main:app --reload
 ```
 
-Open:
-- API root: `http://127.0.0.1:8000/`
-- Docs: `http://127.0.0.1:8000/docs`
+### 6. Open in browser
 
-## Notes
-- This scaffold is **HIPAA-inspired**, not HIPAA certified.
-- SQLite is included for easy startup. You can later switch to PostgreSQL.
-- The database tables are not fully modeled yet on purpose.
+* API: http://127.0.0.1:8000
+* Docs: http://127.0.0.1:8000/docs
 
-## Team Planning Prompt
-Before building, decide:
-- SQL vs MongoDB final choice
-- JWT vs server-side sessions
-- Which fields count as sensitive PHI
-- Which actions must always be audit logged
-- Which roles can search or view patient records
+---
+
+## 👥 Team Responsibilities
+
+This project is intentionally incomplete to allow **equal contribution**.
+
+Suggested areas of ownership:
+
+| Area             | Responsibilities                               |
+| ---------------- | ---------------------------------------------- |
+| Authentication   | Login, password hashing, sessions/JWT, roles   |
+| Patient Records  | CRUD operations, validation, data structure    |
+| Search           | Filtering, secure queries, access restrictions |
+| Admissions       | Admission workflow, status tracking            |
+| Clinician View   | Role-restricted endpoints, dashboards          |
+| Audit & Security | Logging, threat modeling, access tracking      |
+
+See: `docs/team_tasks.md`
+
+---
+
+## 🔐 Security Focus
+
+This system is designed with **security-first thinking**:
+
+### Key Concerns
+
+* Protecting sensitive health information (PHI)
+* Preventing unauthorized access
+* Securing user input and database queries
+* Tracking access to patient data
+
+### Planned Controls
+
+* Password hashing (bcrypt/passlib)
+* Role-based access control (RBAC)
+* Audit logging for sensitive operations
+* Input validation and sanitization
+* Least-privilege access design
+
+---
+
+## ⚠️ Disclaimer
+
+This project is **for educational purposes only**.
+
+It is **NOT HIPAA-compliant** and should not be used in a real healthcare environment without significant additional security, compliance, and legal validation.
+
+---
+
+## 🧠 Threat Modeling
+
+Initial threat considerations include:
+
+* Unauthorized data access
+* Injection attacks
+* Credential compromise
+* Data leakage through logs
+* Insider misuse
+
+See: `docs/threat_model.md`
+
+---
+
+## 🛠️ Future Enhancements
+
+* JWT-based authentication
+* PostgreSQL + migrations
+* Encryption for sensitive fields
+* Rate limiting and brute-force protection
+* Full audit trail with timestamps and IP tracking
+* Dockerized deployment
+* Frontend UI integration
+
+---
+
+## 🤝 Contribution Guidelines
+
+* Pick a feature area and create a branch
+* Follow existing project structure
+* Add comments and TODOs where needed
+* Test your endpoints before merging
+* Participate in security review discussions
+
+---
+
+## 📄 License
+
+This project is for academic use. Add a license if required by your course.

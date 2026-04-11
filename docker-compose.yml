@@ -1,0 +1,27 @@
+services:
+  web:
+    build: .
+    container_name: patient_portal_web
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:16
+    container_name: patient_portal_db
+    environment:
+      POSTGRES_DB: patient_portal
+      POSTGRES_USER: patient_user
+      POSTGRES_PASSWORD: patient_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

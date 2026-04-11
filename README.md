@@ -94,6 +94,7 @@ uvicorn app.main:app --reload
 ### 6. Open in browser
 
 * API: http://127.0.0.1:8000
+* Login: http://127.0.0.1:8000/login  (Placeholder non-functioning)
 * Docs: http://127.0.0.1:8000/docs
 
 ---

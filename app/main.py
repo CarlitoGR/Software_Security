@@ -3,7 +3,7 @@ from time import sleep
 from fastapi import FastAPI
 from sqlalchemy.exc import OperationalError
 
-from app.routes import auth, patients, admissions, clinician, audit
+from app.routes import auth, patients, admissions, clinician, audit, ui
 from app.db import Base, engine
 
 app = FastAPI(title="Patient Portal Team Scaffold")
@@ -29,7 +29,7 @@ app.include_router(patients.router)
 app.include_router(admissions.router)
 app.include_router(clinician.router)
 app.include_router(audit.router)
-
+app.include_router(ui.router)
 
 @app.get("/")
 def root() -> dict[str, str]:

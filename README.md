@@ -184,4 +184,4 @@ See: `docs/threat_model.md`
 
 ## 📄 License
 
-This project is for academic use. Add a license if required by your course.
+This project is for academic use.

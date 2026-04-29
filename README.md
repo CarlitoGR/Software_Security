@@ -62,7 +62,7 @@ tests/                 # Placeholder for tests
 ### 1. Clone the repo
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/CarlitoGR/Software_Security.git
 cd patient-portal
 ```
 

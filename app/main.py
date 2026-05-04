@@ -31,6 +31,7 @@ app.include_router(clinician.router)
 app.include_router(audit.router)
 app.include_router(ui.router)
 
+
 @app.get("/")
 def root() -> dict[str, str]:
     return {"message": "Patient Portal Team Scaffold is running"}

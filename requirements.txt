@@ -6,4 +6,5 @@ pydantic
 python-dotenv
 passlib[bcrypt]
 psycopg2-binary
-
+python-multipart
+itsdangerous

@@ -10,6 +10,13 @@ engine = create_engine(settings.database_url, connect_args=connect_args)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 Base = declarative_base()
 
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
 # TODO(team):
 # - Add a database dependency for FastAPI routes
 # - Consider PostgreSQL for a more realistic deployment

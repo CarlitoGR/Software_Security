@@ -8,7 +8,8 @@ class Patient(Base):
     first_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False)
     date_of_birth = Column(String, nullable=True)
-    medical_record_number = Column(String, unique=True, nullable=True)
+    gender = Column(String, nullable=False)
+    phone = Column(String, nullable=True)
 
     # TODO(team-records):
     # - Add contact info, emergency contact, diagnoses, or insurance fields as needed

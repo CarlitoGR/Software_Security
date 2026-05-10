@@ -1,26 +1,56 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.orm import Session
 
-router = APIRouter(prefix="/patients", tags=["patients"])
+from app.db import get_db
+from app.models.patient import Patient
+from app.models.user import User
+from app.schemas.patient import PatientCreate, PatientRead
+from app.security import get_current_user
 
-@router.get("/")
-def list_patients() -> dict[str, str]:
-    # TODO(team-records/search):
-    # - Restrict access by role
-    # - Return filtered patient list
-    return {"message": "List patients placeholder"}
+router = APIRouter(prefix="/patients", tags=["Patients"])
 
-@router.get("/search")
-def search_patients() -> dict[str, str]:
-    # TODO(team-search):
-    # - Add query parameters
-    # - Search by name, MRN, DOB, or other allowed fields
-    # - Prevent overbroad results and unauthorized lookup
-    return {"message": "Search patients placeholder"}
 
-@router.get("/{patient_id}")
-def get_patient(patient_id: int) -> dict[str, str | int]:
-    # TODO(team-records/audit):
-    # - Validate caller permissions
-    # - Load patient record
-    # - Audit this access
-    return {"message": "Get patient placeholder", "patient_id": patient_id}
+@router.post("/", response_model=PatientRead, status_code=status.HTTP_201_CREATED)
+def create_patient(
+    patient_data: PatientCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+) -> Patient:
+    patient = Patient(
+        first_name=patient_data.first_name,
+        last_name=patient_data.last_name,
+        date_of_birth=patient_data.date_of_birth,
+        gender=patient_data.gender,
+        phone=patient_data.phone,
+    )
+
+    db.add(patient)
+    db.commit()
+    db.refresh(patient)
+
+    return patient
+
+
+@router.get("/", response_model=list[PatientRead])
+def list_patients(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+) -> list[Patient]:
+    return db.query(Patient).all()
+
+
+@router.get("/{patient_id}", response_model=PatientRead)
+def get_patient(
+    patient_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+) -> Patient:
+    patient = db.query(Patient).filter(Patient.id == patient_id).first()
+
+    if patient is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Patient not found.",
+        )
+
+    return patient

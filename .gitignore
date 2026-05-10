@@ -1,5 +1,35 @@
-venv/
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
+
+# Environment files
 .env
-patient_portal.db
+
+# IDEs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+
+# Pytest
+.pytest_cache/
+
+# Alembic cache
+*.sqlite3
+
+# Docker
+postgres_data/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Logs
+*.log

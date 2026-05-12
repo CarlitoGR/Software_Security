@@ -3,10 +3,20 @@ from time import sleep
 from fastapi import FastAPI
 from sqlalchemy.exc import OperationalError
 
-from app.routes import auth, patients, admissions, clinician, audit, ui
+from app.routes import auth, patients, admissions, audit, ui
 from app.db import Base, engine
 
-app = FastAPI(title="Patient Portal Team Scaffold")
+app = FastAPI(
+    title="Secure Patient Portal API",
+    version="1.0.0",
+    description=(
+        "A secure healthcare-style backend API using FastAPI, "
+        "JWT authentication, PostgreSQL, Docker, and Alembic.\n\n"
+        "Current MVP features include authentication and patient management.\n\n"
+        "Additional modules such as admissions, clinician workflows, "
+        "audit logging, and UI integration are planned for future implementation."
+    ),
+)
 
 
 @app.on_event("startup")
@@ -27,7 +37,6 @@ def startup() -> None:
 app.include_router(auth.router)
 app.include_router(patients.router)
 app.include_router(admissions.router)
-app.include_router(clinician.router)
 app.include_router(audit.router)
 app.include_router(ui.router)
 

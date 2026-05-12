@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-router = APIRouter(prefix="/clinician", tags=["clinician"])
+router = APIRouter(prefix="/clinician", tags=["Future Implementation - Clinician"])
 
 @router.get("/dashboard")
 def clinician_dashboard() -> dict[str, str]:
